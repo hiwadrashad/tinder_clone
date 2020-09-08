@@ -7,8 +7,10 @@
              x:Class="tinder_clone.Views.MessagePage">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Send SMS" Clicked="SendSMS_OnClicked"></Button>
-            <Button Text="Phone Call" Clicked="PhoneCall_OnClicked"></Button>
+            <Grid x:Name="MainGrid">
+                <Button Text="Send SMS" Grid.Row="0" Clicked="SendSMS_OnClicked"></Button>
+                <Button Text="Phone Call" Grid.Row="1" Clicked="PhoneCall_OnClicked"></Button>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

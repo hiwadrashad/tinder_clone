@@ -10,7 +10,7 @@
 
         <StackLayout>
             <StackLayout VerticalOptions="Start" >
-                <Image Source="{Binding Images}"></Image>
+                <Image  x:Name="SwipeImage" Source="{Binding Images}"></Image>
             </StackLayout>
             <StackLayout Orientation="Horizontal" VerticalOptions="End">
 

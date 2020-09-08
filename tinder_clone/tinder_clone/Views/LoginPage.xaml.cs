@@ -14,16 +14,23 @@ namespace tinder_clone.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        string fileNameu = @"C:\Tempu.txt";
+        string fileNamew = @"C:\Tempw.txt";
+
+
+
+
+        LoginPage loginPage = new LoginPage();
         public LoginPage()
         {
             SetValue(NavigationPage.HasNavigationBarProperty, false);
             InitializeComponent();
         }
 
-         void Handle_Clicked(object sender, EventArgs e)
+        void Handle_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new RegistrationPage();
-           //await Navigation.PushAsync(new RegistrationPage());
+            //await Navigation.PushAsync(new RegistrationPage());
         }
 
         void Handle_Clicked1(object sender, EventArgs e)
@@ -34,25 +41,36 @@ namespace tinder_clone.Views
 
             if (myquery != null)
             {
-                App.Current.MainPage = new HomePage();
-
-            }
-            else 
-            {
-                Device.BeginInvokeOnMainThread(async () =>
+                if (!File.Exists(fileNameu))
                 {
-
-                    var result = await this.DisplayAlert("Congratulations", "failed user name and password", "Yes", "Cancel");
-
-                    if (result)
-                        App.Current.MainPage = new LoginPage();
-                    else
+                    using (StreamWriter writer = File.CreateText(fileNameu))
                     {
-                        App.Current.MainPage = new LoginPage();
+                        writer.WriteLine(myquery.Username);
                     }
-                });
+                    using (StreamWriter writer = File.CreateText(fileNamew))
+                    {
+                        writer.WriteLine(myquery.Password);
+                    }
+                    App.Current.MainPage = new HomePage();
+
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+
+                        var result = await this.DisplayAlert("Congratulations", "failed user name and password", "Yes", "Cancel");
+
+                        if (result)
+                            App.Current.MainPage = new LoginPage();
+                        else
+                        {
+                            App.Current.MainPage = new LoginPage();
+                        }
+                    });
+                }
+
             }
-        
         }
     }
 }

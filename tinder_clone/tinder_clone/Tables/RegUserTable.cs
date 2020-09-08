@@ -21,6 +21,10 @@ namespace tinder_clone.Tables
 
         public Dictionary<int, bool> Matches { get; set; }
 
+        public List<string> telephonenumbers { get; set; }
+
+        public List<string> MatchNames { get; set; }
+
 
     }
 }

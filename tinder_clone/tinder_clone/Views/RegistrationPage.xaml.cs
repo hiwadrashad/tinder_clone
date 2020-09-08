@@ -24,7 +24,7 @@ namespace tinder_clone.Views
             this.btnfoto.Clicked += Btnfoto_Clicked;
         }
 
-
+        //pick picture from gallery
         private async void Btnfoto_Clicked(object sender, EventArgs e)
         {
             if (!CrossMedia.Current.IsPickPhotoSupported)
@@ -48,6 +48,7 @@ namespace tinder_clone.Views
                 return stream;
             });
 
+            // take picture method
             /* try
              {
                  await CrossMedia.Current.Initialize();
@@ -75,6 +76,7 @@ namespace tinder_clone.Views
 
         }
 
+        //register person
         void Handle_Clicked(object sender, EventArgs e)
         {
             var binFormatter = new BinaryFormatter();
@@ -99,8 +101,8 @@ namespace tinder_clone.Views
                 
 
             };
-            var ms = new MemoryStream(item.UploadedImage);
-            var returnImage = BitmapImage();
+          //  var ms = new MemoryStream(item.UploadedImage);
+         //   this.imgcamara.Source = ImageSource.FromStream(() => ms);
 
             db.Insert(item);
             Device.BeginInvokeOnMainThread(async () =>
