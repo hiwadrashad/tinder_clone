@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="tinder_clone.Views.LoginPage">
+             x:Class="tinder_clone.Views.LoginPage"
+             BackgroundImageSource="login_page.png">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -15,10 +16,10 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Entry Placeholder="UserName" x:Name="EntryUser" Grid.Row="0"/>
-                    <Entry Placeholder="Password" x:Name="EntryPassword" Grid.Row="1" IsPassword="True"/>
-                    <Button Text="Login" Grid.Row="2" BackgroundColor="#0077BE" TextColor="white" Clicked="Handle_Clicked1"/>
-                    <Button Text="SignUp" Grid.Row="3" Clicked="Handle_Clicked"/>
+                    <Entry Placeholder="UserName" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="Black" x:Name="EntryUser" Grid.Row="0"/>
+                    <Entry Placeholder="Password" HorizontalTextAlignment="Center" FontAttributes="Bold" x:Name="EntryPassword" Grid.Row="1" IsPassword="True"/>
+                    <Button Text="Login"  Grid.Row="2" BackgroundColor="LightPink" TextColor="Black" Clicked="Handle_Clicked1"/>
+                    <Button Text="SignUp" Grid.Row="3" Clicked="Handle_Clicked"  TextColor="Black" BackgroundColor="LightPink"/>
                 </Grid>
             </StackLayout>
 

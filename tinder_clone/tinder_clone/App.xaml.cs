@@ -14,7 +14,7 @@ namespace tinder_clone
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new MessagePage();
+            MainPage = new LoginPage();
                        
         }
 

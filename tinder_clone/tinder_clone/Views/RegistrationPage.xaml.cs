@@ -17,6 +17,7 @@ namespace tinder_clone.Views
     public partial class RegistrationPage : ContentPage
     {
     
+
         public RegistrationPage()
         {
 

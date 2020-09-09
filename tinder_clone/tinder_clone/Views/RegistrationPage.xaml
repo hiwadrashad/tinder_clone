@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="tinder_clone.Views.RegistrationPage">
+             x:Class="tinder_clone.Views.RegistrationPage"
+             BackgroundImageSource="login_page.png">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -18,33 +19,34 @@
 
                     </Grid.RowDefinitions>
                     <StackLayout Grid.Row="0">
-                        <Entry Placeholder="Username" FontSize="16" x:Name="EntryUserName"></Entry>
+                        <Entry Placeholder="Username" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="Black"  FontSize="16" x:Name="EntryUserName"></Entry>
 
                     </StackLayout>
                     <StackLayout Grid.Row="1">
-                        <Entry Placeholder="Password" IsPassword="True" FontSize="16" x:Name="EntryUserPassword"></Entry>
+                        <Entry Placeholder="Password"  FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="Black" IsPassword="True" FontSize="16" x:Name="EntryUserPassword"></Entry>
 
                     </StackLayout>
                     <StackLayout Grid.Row="2">
-                        <Entry Placeholder="Email" FontSize="16" x:Name="EntryUserEmail"></Entry>
+                        <Entry Placeholder="Email" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="Black" FontSize="16" x:Name="EntryUserEmail"></Entry>
 
                     </StackLayout>
                     <StackLayout Grid.Row="3">
-                        <Entry Placeholder="PhoneNumber" FontSize="16" x:Name="EntryUserPhoneNumber"></Entry>
+                        <Entry Placeholder="PhoneNumber"  FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="Black" FontSize="16" x:Name="EntryUserPhoneNumber"></Entry>
 
                     </StackLayout>
 
                     <StackLayout Grid.Row="4">
-                        <Button x:Name="btnfoto" Text="Upload Image" TextColor="White" WidthRequest="100" BackgroundColor="#0077BE" Clicked="Btnfoto_Clicked"></Button>
+                        <Button x:Name="btnfoto"  Text="Upload Image" TextColor="Black" WidthRequest="100" BackgroundColor="LightPink" Clicked="Btnfoto_Clicked"></Button>
                     </StackLayout>
 
                     <StackLayout Grid.Row="5">
-                        <Button Text="Register"  TextColor="White" WidthRequest="100" BackgroundColor="#0077BE" Clicked="Handle_Clicked"></Button>
+                        <Button Text="Register"  TextColor="Black" WidthRequest="100" BackgroundColor="LightPink" Clicked="Handle_Clicked"></Button>
                     </StackLayout>
 
                     <StackLayout Grid.Row="6">
-                        <Image x:Name="imgcamara" BackgroundColor="Black"></Image>
-                    </StackLayout>
+                        <Image IsVisible="False" x:Name="imgcamara" BackgroundColor="Black"></Image>
+                    </StackLayout> 
+                    
 
                 </Grid>
             </StackLayout>

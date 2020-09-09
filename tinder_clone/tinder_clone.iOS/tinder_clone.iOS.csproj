@@ -187,4 +187,19 @@
   <ItemGroup>
     <None Include="Resources\pic7.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\login_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swipe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swipe2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swipe.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\contact.png" />
+  </ItemGroup>
 </Project>

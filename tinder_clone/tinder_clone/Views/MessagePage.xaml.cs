@@ -16,25 +16,25 @@ namespace tinder_clone.Views
     public partial class MessagePage : ContentPage
     {
 
-        string fileNameu = @"C:\Temp.txt";
-        string filenamew = @"C:\Tempw.txt";
+     //   string fileNameu = @"C:\Temp.txt";
+     //   string filenamew = @"C:\Tempw.txt";
 
         public MessagePage()
         {
             InitializeComponent();
 
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
+          /*  var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
             var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
             var matchnumbers = myquery.telephonenumbers;
             var matchnames = myquery.MatchNames;
 
 
-            for (int i = 0; i < matchnames.Count; i++)
+            for (int i = 0; i < matchnumbers.Count; i++)
             {
                 Label label = new Label();
-                label.Text = "mellisa bangs";
-                Grid.SetRow(label, 2);
+                label.Text = matchnames[i];
+                Grid.SetRow(label, 2 + i);
                 Grid.SetColumn(label, 0);
                 label.FontSize = 30;
                 label.HorizontalTextAlignment = TextAlignment.Center;
@@ -42,19 +42,54 @@ namespace tinder_clone.Views
 
                 Button button = new Button();
                 button.Text = "Send Sms";
-                Grid.SetRow(button, 3);
+                Grid.SetRow(button, 3 + i);
                 Grid.SetColumn(button, 0);
-                button.Clicked += SendSMS_OnClicked;
+                button.Clicked += SendSMSprocedural;
                 MainGrid.Children.Add(button);
 
 
                 Button buttoncall = new Button();
-                buttoncall.Text = "Send Sms";
-                Grid.SetRow(buttoncall, 4);
+                buttoncall.Text = "Call";
+                Grid.SetRow(buttoncall, 4 + i);
                 Grid.SetColumn(buttoncall, 0);
                 buttoncall.Clicked += PhoneCall_OnClicked;
                 MainGrid.Children.Add(buttoncall);
             }
+            */
+
+          /*  Label label = new Label();
+            label.Text = "mellisa bangs";
+            Grid.SetRow(label, 2);
+            Grid.SetColumn(label, 0);
+            label.FontSize = 30;
+            label.HorizontalTextAlignment = TextAlignment.Center;
+            MainGrid.Children.Add(label);
+
+            Button button = new Button();
+            button.Text = "Send Sms";
+            Grid.SetRow(button, 3);
+            Grid.SetColumn(button, 0);
+            button.Clicked += SendSMS_OnClicked;
+            MainGrid.Children.Add(button);
+
+
+            Button buttoncall = new Button();
+            buttoncall.Text = "Send Sms";
+            Grid.SetRow(buttoncall, 4);
+            Grid.SetColumn(buttoncall, 0);
+            buttoncall.Clicked += PhoneCall_OnClicked;
+            MainGrid.Children.Add(buttoncall);
+            */
+        }
+
+        private void SendSMSprocedural(object sender, EventArgs e)
+        { 
+        
+        }
+
+        private void SendCallprocedural(string number)
+        {
+
         }
 
         private void SendSMS_OnClicked (object sender, EventArgs e)

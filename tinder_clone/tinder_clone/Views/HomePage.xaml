@@ -4,12 +4,17 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="tinder_clone.Views.HomePage">
+             x:Class="tinder_clone.Views.HomePage"
+             BackgroundImageSource="login_page.png">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical">
-            <Image VerticalOptions="CenterAndExpand" Source="C:\Users\itv-admin\source\repos\tinder_clone\tinder_clone\tinder_clone\images\img_lights.jpg"></Image>
-            <Button VerticalOptions="CenterAndExpand" Text="Logout" Clicked="Handle_Clicked" TextColor="#0077BE"/>
-        </StackLayout>
+        <Grid VerticalOptions="CenterAndExpand" Margin="28" RowSpacing="20">
+
+            <Image Source="swipe2.png" MinimumWidthRequest="50" Grid.Row="1"></Image>
+            <Label Text="Swipe Page" FontSize="40" FontAttributes="Bold, Italic" TextColor="White" HorizontalTextAlignment="Center" Grid.Row="2"></Label>
+            <Image Source="contact.png" Grid.Row="3"></Image>
+            <Label Text="Contact Page" FontSize="40" TextColor="White" FontAttributes="Bold, Italic" HorizontalTextAlignment="Center" Grid.Row="4"></Label>
+
+        </Grid>
     </ContentPage.Content>
         
 </ContentPage>
