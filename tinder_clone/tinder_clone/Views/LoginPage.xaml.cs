@@ -41,36 +41,35 @@ namespace tinder_clone.Views
 
             if (myquery != null)
             {
-                if (!File.Exists(fileNameu))
+
+                using (StreamWriter writer = File.CreateText(fileNameu))
                 {
-                    using (StreamWriter writer = File.CreateText(fileNameu))
-                    {
-                        writer.WriteLine(myquery.Username);
-                    }
-                    using (StreamWriter writer = File.CreateText(fileNamew))
-                    {
-                        writer.WriteLine(myquery.Password);
-                    }
-                    App.Current.MainPage = new HomePage();
-
+                    writer.WriteLine(myquery.Username);
                 }
-                else
+                using (StreamWriter writer = File.CreateText(fileNamew))
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-
-                        var result = await this.DisplayAlert("Congratulations", "failed user name and password", "Yes", "Cancel");
-
-                        if (result)
-                            App.Current.MainPage = new LoginPage();
-                        else
-                        {
-                            App.Current.MainPage = new LoginPage();
-                        }
-                    });
+                    writer.WriteLine(myquery.Password);
                 }
+                App.Current.MainPage = new HomePage();
 
             }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+
+                    var result = await this.DisplayAlert("Congratulations", "failed user name and password", "Yes", "Cancel");
+
+                    if (result)
+                        App.Current.MainPage = new LoginPage();
+                    else
+                    {
+                        App.Current.MainPage = new LoginPage();
+                    }
+                });
+            }
+
+            
         }
     }
 }

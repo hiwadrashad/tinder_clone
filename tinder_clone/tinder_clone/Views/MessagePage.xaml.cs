@@ -22,6 +22,7 @@ namespace tinder_clone.Views
         public MessagePage()
         {
             InitializeComponent();
+            
 
           /*  var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);

@@ -37,12 +37,40 @@ namespace tinder_clone.Views
 
         }
 
-        void OnImageNameTapped(object sender, EventArgs args)
+        void NoTapped(object sender, EventArgs args)
         {
-           // testmodel testitem = new testmodel();
-           // testitem.Images = "test2.jpg";
-           // BindingContext = testitem;
-          
+            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
+            var db = new SQLiteConnection(dbpath);
+            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
+            var previousmatcheslist = myquery.Matches;
+            // testmodel testitem = new testmodel();
+            // testitem.Images = "test2.jpg";
+            // BindingContext = testitem;
+
+        }
+
+        void YesTapped(object sender, EventArgs args)
+        {
+            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
+            var db = new SQLiteConnection(dbpath);
+            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
+            var previousmatcheslist = myquery.Matches;
+            // testmodel testitem = new testmodel();
+            // testitem.Images = "test2.jpg";
+            // BindingContext = testitem;
+
+        }
+
+        void SuperLikeTapped(object sender, EventArgs args)
+        {
+            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
+            var db = new SQLiteConnection(dbpath);
+            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
+            var previousmatcheslist = myquery.Matches;
+            // testmodel testitem = new testmodel();
+            // testitem.Images = "test2.jpg";
+            // BindingContext = testitem;
+
         }
 
 

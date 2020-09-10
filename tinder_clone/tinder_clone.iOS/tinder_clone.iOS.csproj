@@ -202,4 +202,16 @@
   <ItemGroup>
     <BundleResource Include="Resources\contact.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backgroundpage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vectorbackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vectorbackground2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tinder.jpg" />
+  </ItemGroup>
 </Project>

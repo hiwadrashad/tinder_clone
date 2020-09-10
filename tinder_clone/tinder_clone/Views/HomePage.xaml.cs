@@ -17,9 +17,23 @@ namespace tinder_clone.Views
             InitializeComponent();
         }
 
-        void Handle_Clicked(object sender, EventArgs e)
+
+        void SwipePageTapped(object sender, EventArgs e)
         {
-         
+            App.Current.MainPage = new SwipePage();
+
+        }
+
+        void ContactPageTapped(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new MessagePage();
+
+        }
+
+        void LogOutClicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
+
         }
     }
 }

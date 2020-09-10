@@ -5,39 +5,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:swipeCardView="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
              mc:Ignorable="d"
-             x:Class="tinder_clone.Views.SwipePage">
+             x:Class="tinder_clone.Views.SwipePage"
+             >
     <ContentPage.Content>
 
-        <StackLayout>
-            <StackLayout VerticalOptions="Start" >
-                <Image  x:Name="SwipeImage" Source="{Binding Images}"></Image>
+        
+            <StackLayout>
+                <StackLayout VerticalOptions="Start" >
+                    <!-- Source="{Binding Images}"> -->
+                <Image  x:Name="SwipeImage" Source="test1.png" WidthRequest="400" HeightRequest="400"></Image>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" VerticalOptions="End">
+
+
+                    <Image  WidthRequest="100" HorizontalOptions="CenterAndExpand" Source="C:\Users\itv-admin\source\repos\tinder_clone\tinder_clone\tinder_clone\Resources\cross2.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                     Tapped="NoTapped"
+                     NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image WidthRequest="100" HorizontalOptions="CenterAndExpand" Source="heart2.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                     Tapped="YesTapped"
+                     NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image WidthRequest="100" HorizontalOptions="CenterAndExpand" Source="superlike2.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                     Tapped="SuperLikeTapped"
+                     NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" VerticalOptions="End">
-
-
-                 <Image  Source="cross2.png">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer
-                     Tapped="OnImageNameTapped"
-                     NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-
-                <Image Source="heart2.png">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer
-                     Tapped="OnImageNameTapped"
-                     NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-                <Image  Source="superlike2.png">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer
-                     Tapped="OnImageNameTapped"
-                     NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </StackLayout>
-        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

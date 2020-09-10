@@ -4,13 +4,27 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="tinder_clone.Views.MessagePage">
+             x:Class="tinder_clone.Views.MessagePage"
+             BackgroundImageSource="vectorbackground2">
     <ContentPage.Content>
+
+       <!-- <Grid x:Name="MainGrid"> -->
+
+
         <StackLayout>
-            <Grid x:Name="MainGrid">
-                <Button Text="Send SMS" Grid.Row="0" Clicked="SendSMS_OnClicked"></Button>
-                <Button Text="Phone Call" Grid.Row="1" Clicked="PhoneCall_OnClicked"></Button>
-            </Grid>
-        </StackLayout>
+            <ScrollView VerticalScrollBarVisibility="Default">
+
+                    <Grid x:Name="MainGrid">
+                    <Label Text="michael " TextColor="Black" Grid.Column="0" Grid.Row="0" VerticalOptions="End" FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+                    <Label Text="Johnson " TextColor="Black" Grid.Column="0" Grid.Row="1"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+
+                    <Button Text="Send SMS" VerticalOptions="End" Grid.Column="1"  Grid.Row="0" FontAttributes="Bold, Italic" BackgroundColor="LightGray" Clicked="SendSMS_OnClicked"></Button>
+                    <Button  Text="Phone Call" VerticalOptions="Start" Grid.Column="1" Grid.Row="1" FontAttributes="Bold, Italic" BackgroundColor="LightGray" Clicked="PhoneCall_OnClicked"></Button>
+                </Grid>
+                </ScrollView>
+            </StackLayout>
+
+        <!-- </Grid> -->
+
     </ContentPage.Content>
 </ContentPage>

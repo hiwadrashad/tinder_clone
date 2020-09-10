@@ -5901,10 +5901,10 @@ namespace tinder_clone.Droid
 			public const int avd_show_password = 2131165275;
 			
 			// aapt resource value: 0x7F07005C
-			public const int contact = 2131165276;
+			public const int backgroundpage = 2131165276;
 			
 			// aapt resource value: 0x7F07005D
-			public const int cross2 = 2131165277;
+			public const int contact = 2131165277;
 			
 			// aapt resource value: 0x7F07005E
 			public const int design_bottom_navigation_item_background = 2131165278;
@@ -6003,13 +6003,22 @@ namespace tinder_clone.Droid
 			public const int test2 = 2131165309;
 			
 			// aapt resource value: 0x7F07007E
-			public const int tooltip_frame_dark = 2131165310;
+			public const int tinder = 2131165310;
 			
 			// aapt resource value: 0x7F07007F
-			public const int tooltip_frame_light = 2131165311;
+			public const int tooltip_frame_dark = 2131165311;
 			
 			// aapt resource value: 0x7F070080
-			public const int xamarin_logo = 2131165312;
+			public const int tooltip_frame_light = 2131165312;
+			
+			// aapt resource value: 0x7F070081
+			public const int vectorbackground = 2131165313;
+			
+			// aapt resource value: 0x7F070082
+			public const int vectorbackground2 = 2131165314;
+			
+			// aapt resource value: 0x7F070083
+			public const int xamarin_logo = 2131165315;
 			
 			static Drawable()
 			{
