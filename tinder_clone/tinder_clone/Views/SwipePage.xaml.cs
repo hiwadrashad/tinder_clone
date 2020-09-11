@@ -19,30 +19,61 @@ namespace tinder_clone.Views
     {
         string fileNameu = @"C:\Temp.txt";
         string filenamew = @"C:\Tempw.txt";
+        tinder_clone.Tables.RegUserTable eligableuser;
 
-        LoginPage page = new LoginPage();
+        //        LoginPage page = new LoginPage();
         public SwipePage()
         {
-            LoginPage login = new LoginPage();
-            
+            //   LoginPage login = new LoginPage();
+            createnextmatch();
+    
+
+            // var listofallavailable = db.Table<RegUserTable>().Where(u => u.UserId)
+            //  testmodel testitem = new testmodel();
+            //  testitem.Images = "test1.png";
+            //  BindingContext = testitem;
+            //  InitializeComponent();
+
+        }
+
+        public void createnextmatch()
+        {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
             var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var previousmatcheslist =  myquery.Matches;
-          //  var listofallavailable = db.Table<RegUserTable>().Where(u => u.UserId)
-            // testmodel testitem = new testmodel();
-           // testitem.Images = "test1.png";
-           // BindingContext = testitem;
-           // InitializeComponent();
+            var previousmatcheslist = myquery.Matches;
+            for (int i = 0; i < previousmatcheslist.Count; i++)
+            {
+                if (db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])) != null)
+
+                {
+
+                    eligableuser = db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])).FirstOrDefault();
+                    var ms = new MemoryStream(eligableuser.UploadedImage);
+                    this.SwipeImage.Source = ImageSource.FromStream(() => ms);
+                    break;
+                }
+                else
+                {
+                    this.SwipeImage.Source = "test2.jpg";
+                }
+
+            }
 
         }
+
+   
 
         void NoTapped(object sender, EventArgs args)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
             var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var previousmatcheslist = myquery.Matches;
+            var dictionaryofmatches = myquery.Matches;
+            dictionaryofmatches.Add(eligableuser.UserId, false);
+            myquery.Matches = dictionaryofmatches;
+            db.Update(myquery);
+            createnextmatch();
             // testmodel testitem = new testmodel();
             // testitem.Images = "test2.jpg";
             // BindingContext = testitem;
@@ -54,7 +85,21 @@ namespace tinder_clone.Views
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
             var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var previousmatcheslist = myquery.Matches;
+            var secondpersonquery = db.Table<RegUserTable>().Where(u => u.UserId.Equals(eligableuser.UserId)).FirstOrDefault();
+            var dictionaryofmatches = myquery.Matches;
+            dictionaryofmatches.Add(eligableuser.UserId, true);
+            myquery.Matches = dictionaryofmatches;
+            db.Update(myquery);
+            if (eligableuser.Matches[myquery.UserId])
+            {
+                secondpersonquery.telephonenumbers.Add(myquery.PhoneNumber);
+                secondpersonquery.MatchNames.Add(myquery.Username);
+                db.Update(secondpersonquery);
+                myquery.telephonenumbers.Add(secondpersonquery.PhoneNumber);
+                secondpersonquery.MatchNames.Add(secondpersonquery.Username);
+                db.Update(myquery);
+            }
+            createnextmatch();
             // testmodel testitem = new testmodel();
             // testitem.Images = "test2.jpg";
             // BindingContext = testitem;
@@ -66,7 +111,21 @@ namespace tinder_clone.Views
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
             var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var previousmatcheslist = myquery.Matches;
+            var secondpersonquery = db.Table<RegUserTable>().Where(u => u.UserId.Equals(eligableuser.UserId)).FirstOrDefault();
+            var dictionaryofmatches = myquery.Matches;
+            dictionaryofmatches.Add(eligableuser.UserId, true);
+            myquery.Matches = dictionaryofmatches;
+            db.Update(myquery);
+            if (eligableuser.Matches[myquery.UserId])
+            {
+                secondpersonquery.telephonenumbers.Add(myquery.PhoneNumber);
+                secondpersonquery.MatchNames.Add(myquery.Username);
+                db.Update(secondpersonquery);
+                myquery.telephonenumbers.Add(secondpersonquery.PhoneNumber);
+                secondpersonquery.MatchNames.Add(secondpersonquery.Username);
+                db.Update(myquery);
+            }
+            createnextmatch();
             // testmodel testitem = new testmodel();
             // testitem.Images = "test2.jpg";
             // BindingContext = testitem;

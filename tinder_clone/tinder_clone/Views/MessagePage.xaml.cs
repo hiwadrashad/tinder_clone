@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using tinder_clone.Tables;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,80 +17,94 @@ namespace tinder_clone.Views
     public partial class MessagePage : ContentPage
     {
 
-     //   string fileNameu = @"C:\Temp.txt";
-     //   string filenamew = @"C:\Tempw.txt";
+       string fileNameu = @"C:\Temp.txt";
+       string filenamew = @"C:\Tempw.txt";
 
         public MessagePage()
         {
             InitializeComponent();
-            
-
-          /*  var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
+            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
             var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var matchnumbers = myquery.telephonenumbers;
-            var matchnames = myquery.MatchNames;
+            var telephonenumbers = myquery.telephonenumbers;
+            var names = myquery.MatchNames;
 
 
-            for (int i = 0; i < matchnumbers.Count; i++)
-            {
-                Label label = new Label();
-                label.Text = matchnames[i];
-                Grid.SetRow(label, 2 + i);
-                Grid.SetColumn(label, 0);
-                label.FontSize = 30;
-                label.HorizontalTextAlignment = TextAlignment.Center;
-                MainGrid.Children.Add(label);
+              for (int i = 0; i < names.Count; i++)
+              {
+                  Label namelabel = new Label();
+                  Label numberlabel = new Label();
+                  namelabel.Text = names[i];
+                  numberlabel.Text = telephonenumbers[i];
+                  namelabel.TextColor = Xamarin.Forms.Color.Black;
+                  numberlabel.TextColor = Xamarin.Forms.Color.Black;
+                  Grid.SetRow(namelabel, 2 + (i * 2));
+                  Grid.SetColumn(namelabel, 0);
+                  Grid.SetRow(numberlabel, 3 + (i * 2));
+                  Grid.SetColumn(numberlabel, 0);
+                  namelabel.FontSize = 25;
+                  numberlabel.FontSize = 25;
+                  namelabel.FontAttributes = Xamarin.Forms.FontAttributes.Bold;
+                  numberlabel.FontAttributes = Xamarin.Forms.FontAttributes.Bold;
+                  namelabel.HorizontalTextAlignment = TextAlignment.Center;
+                  numberlabel.HorizontalTextAlignment = TextAlignment.Center; 
+                  MainGrid.Children.Add(namelabel);
+                  MainGrid.Children.Add(numberlabel);
 
-                Button button = new Button();
-                button.Text = "Send Sms";
-                Grid.SetRow(button, 3 + i);
-                Grid.SetColumn(button, 0);
-                button.Clicked += SendSMSprocedural;
-                MainGrid.Children.Add(button);
-
-
-                Button buttoncall = new Button();
-                buttoncall.Text = "Call";
-                Grid.SetRow(buttoncall, 4 + i);
-                Grid.SetColumn(buttoncall, 0);
-                buttoncall.Clicked += PhoneCall_OnClicked;
-                MainGrid.Children.Add(buttoncall);
-            }
-            */
-
-          /*  Label label = new Label();
-            label.Text = "mellisa bangs";
-            Grid.SetRow(label, 2);
-            Grid.SetColumn(label, 0);
-            label.FontSize = 30;
-            label.HorizontalTextAlignment = TextAlignment.Center;
-            MainGrid.Children.Add(label);
-
-            Button button = new Button();
-            button.Text = "Send Sms";
-            Grid.SetRow(button, 3);
-            Grid.SetColumn(button, 0);
-            button.Clicked += SendSMS_OnClicked;
-            MainGrid.Children.Add(button);
+                Button smsbutton = new Button();
+                Button callbutton = new Button();
+                smsbutton.Text = "Send Sms";
+                callbutton.Text = "Phone Call";
+                smsbutton.VerticalOptions = LayoutOptions.End;
+                callbutton.VerticalOptions = LayoutOptions.Start;
+                smsbutton.FontAttributes = FontAttributes.Bold | FontAttributes.Italic;
+                callbutton.FontAttributes = FontAttributes.Bold | FontAttributes.Italic;
+                smsbutton.BackgroundColor = Color.LightSalmon;
+                callbutton.BackgroundColor = Color.LightSalmon;
+                Grid.SetRow(smsbutton, 2 + (i * 2));
+                Grid.SetRow(callbutton, 3 + (i * 2));
+                Grid.SetColumn(smsbutton, 1);
+                Grid.SetColumn(callbutton, 1);
+                smsbutton.Clicked += ((s, e) => SendSMSprocedural(s, e, i));
+                callbutton.Clicked += ((s, e)=> SendCallprocedural(s,e,i));
+                MainGrid.Children.Add(smsbutton);
+                MainGrid.Children.Add(callbutton);
 
 
-            Button buttoncall = new Button();
-            buttoncall.Text = "Send Sms";
-            Grid.SetRow(buttoncall, 4);
-            Grid.SetColumn(buttoncall, 0);
-            buttoncall.Clicked += PhoneCall_OnClicked;
-            MainGrid.Children.Add(buttoncall);
-            */
+              
+              }
+              
+
         }
 
-        private void SendSMSprocedural(object sender, EventArgs e)
-        { 
-        
-        }
-
-        private void SendCallprocedural(string number)
+        private void SendSMSprocedural(object sender, EventArgs e, int phoneindex)
         {
+            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
+            var db = new SQLiteConnection(dbpath);
+            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
+            var telephonenumbers = myquery.telephonenumbers;
+
+            var smsMessanger = CrossMessaging.Current.SmsMessenger;
+
+            if (smsMessanger.CanSendSms)
+            {
+                smsMessanger.SendSms(telephonenumbers[phoneindex], "Welcome to Xamarin.Forms");
+            }
+
+        }
+
+        private void SendCallprocedural(object sender, EventArgs e, int phoneindex)
+        {
+            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
+            var db = new SQLiteConnection(dbpath);
+            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
+            var telephonenumbers = myquery.telephonenumbers;
+
+            var phoneCallTask = CrossMessaging.Current.PhoneDialer;
+            if (phoneCallTask.CanMakePhoneCall)
+            {
+                phoneCallTask.MakePhoneCall(telephonenumbers[phoneindex], "my name");
+            }
 
         }
 

@@ -214,4 +214,16 @@
   <ItemGroup>
     <BundleResource Include="Resources\tinder.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cross3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\heart3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\superlike3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\superlike2.gif" />
+  </ItemGroup>
 </Project>

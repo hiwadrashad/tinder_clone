@@ -14,14 +14,14 @@
         <StackLayout>
             <ScrollView VerticalScrollBarVisibility="Default">
 
-                    <Grid x:Name="MainGrid">
-                    <Label Text="michael " TextColor="Black" Grid.Column="0" Grid.Row="0" VerticalOptions="End" FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
-                    <Label Text="Johnson " TextColor="Black" Grid.Column="0" Grid.Row="1"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
-
-                    <Button Text="Send SMS" VerticalOptions="End" Grid.Column="1"  Grid.Row="0" FontAttributes="Bold, Italic" BackgroundColor="LightGray" Clicked="SendSMS_OnClicked"></Button>
-                    <Button  Text="Phone Call" VerticalOptions="Start" Grid.Column="1" Grid.Row="1" FontAttributes="Bold, Italic" BackgroundColor="LightGray" Clicked="PhoneCall_OnClicked"></Button>
+                <Grid x:Name="MainGrid">
+                    <Label Text="michael Johnson " TextColor="Black" Grid.Column="0" Grid.Row="0"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+                    <Label Text="+91 7200606860 " TextColor="Black" Grid.Column="0" Grid.Row="1"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+                    <Button Text="Send SMS" VerticalOptions="End" Grid.Column="1"  Grid.Row="0" FontAttributes="Bold, Italic" BackgroundColor="LightSalmon" Clicked="SendSMS_OnClicked"></Button>
+                    <Button  Text="Phone Call" VerticalOptions="Start" Grid.Column="1" Grid.Row="1" FontAttributes="Bold, Italic" BackgroundColor="LightSalmon"  Clicked="PhoneCall_OnClicked"></Button>
                 </Grid>
-                </ScrollView>
+               
+            </ScrollView>
             </StackLayout>
 
         <!-- </Grid> -->
