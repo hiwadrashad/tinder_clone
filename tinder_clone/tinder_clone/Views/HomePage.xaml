@@ -7,26 +7,36 @@
              x:Class="tinder_clone.Views.HomePage"
              BackgroundImageSource="login_page.png">
     <ContentPage.Content>
-        <Grid VerticalOptions="CenterAndExpand" Margin="28" RowSpacing="20">
+        <StackLayout>
+            <Grid VerticalOptions="CenterAndExpand" Margin="28" RowSpacing="20">
 
-            <Image Source="swipe2.png" MinimumWidthRequest="50" Grid.Row="1">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer
+                <Image Source="swipe2.png" MinimumWidthRequest="50" Grid.Row="1">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
                      Tapped="SwipePageTapped"
                      NumberOfTapsRequired="1" />
-                </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Swipe Page" FontSize="40" FontAttributes="Bold, Italic" TextColor="White" HorizontalTextAlignment="Center" Grid.Row="2"></Label>
-            <Image Source="contact.png" Grid.Row="3">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Swipe Page" FontSize="40" FontAttributes="Bold, Italic" TextColor="White" HorizontalTextAlignment="Center" Grid.Row="2"></Label>
+                <Image Source="contact.png" Grid.Row="3">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
                      Tapped="ContactPageTapped"
                      NumberOfTapsRequired="1" />
-                </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Contact Page" FontSize="40" TextColor="White" FontAttributes="Bold, Italic" HorizontalTextAlignment="Center" Grid.Row="4"></Label>
-            <Button Text="Log Out" TextColor="Black" FontSize="25" Clicked="LogOutClicked" FontAttributes="Bold, Italic"  BackgroundColor="LightPink" Grid.Row="5"></Button>
-        </Grid>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Contact Page" FontSize="40" TextColor="White" FontAttributes="Bold, Italic" HorizontalTextAlignment="Center" Grid.Row="4"></Label>
+                <Image Scale=".8" Grid.Row="5" Source="C:\Users\itv-admin\source\repos\tinder_clone\tinder_clone\tinder_clone\Resources\superlikemenu.gif">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                     Tapped="SuperLikePageTapped"
+                     NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Superlike Page" FontSize="40" TextColor="White" FontAttributes="Bold, Italic" HorizontalTextAlignment="Center" Grid.Row="6"></Label>
+                <Button Text="Log Out" TextColor="Black" FontSize="25" Clicked="LogOutClicked" FontAttributes="Bold, Italic"  BackgroundColor="LightPink" Grid.Row="7"></Button>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
         
 </ContentPage>

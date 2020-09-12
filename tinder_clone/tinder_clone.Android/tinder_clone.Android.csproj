@@ -108,34 +108,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\drawable\pic1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\drawable\pic2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\drawable\pic3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\drawable\pic4.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\drawable\pic5.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\drawable\pic6.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\drawable\pic7.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\heart2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\superlike2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\pic7small.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\test1.png" />
@@ -155,9 +128,6 @@
     <AndroidResource Include="Resources\swipe.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\swipe.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\swipe2.png" />
   </ItemGroup>
   <ItemGroup>
@@ -170,28 +140,22 @@
     <AndroidResource Include="Resources\drawable\backgroundpage.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\drawable\cross2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\vectorbackground.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\vectorbackground2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\tinder.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\cross3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\heart3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\superlike3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\superlike2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cross2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\heart2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drawable\superlikemenu.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

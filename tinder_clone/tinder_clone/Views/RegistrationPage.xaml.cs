@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Plugin.Media;
+using Plugin.Media.Abstractions;
 using SQLite;
 using tinder_clone.Tables;
 using Xamarin.Forms;
@@ -35,9 +36,10 @@ namespace tinder_clone.Views
             }
             var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
             {
-                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+                PhotoSize = PhotoSize.MaxWidthHeight,
+                MaxWidthHeight = 500
 
-            });
+            }); ;
 
             if (file == null)
                 return;
@@ -85,6 +87,7 @@ namespace tinder_clone.Views
             Random rnd = new Random();
             binFormatter.Serialize(mstream, this.imgcamara);
            
+           
 
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
@@ -116,6 +119,12 @@ namespace tinder_clone.Views
 
             }
             );
+        }
+
+        //back button
+        void Back_Page(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
         }
     }
 }

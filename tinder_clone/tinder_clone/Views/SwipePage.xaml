@@ -31,6 +31,7 @@
                      NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
             </Image>
+            
             <Image Grid.Row="1" Grid.Column="2" WidthRequest="100" HorizontalOptions="CenterAndExpand" Source="superlike2.gif">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
@@ -38,6 +39,9 @@
                      NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
             </Image>
+            <StackLayout>
+                <Button CornerRadius="20" Text="Go back" BackgroundColor="LightPink" TextColor="Black" VerticalOptions="End" HorizontalOptions="Center" Clicked="Go_Back"></Button>
+            </StackLayout>
 
         </Grid>
     </ContentPage.Content>

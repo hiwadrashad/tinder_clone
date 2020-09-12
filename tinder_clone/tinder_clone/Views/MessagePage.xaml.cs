@@ -14,6 +14,8 @@ using Xamarin.Forms.Xaml;
 namespace tinder_clone.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    
+    // message page to contact users
     public partial class MessagePage : ContentPage
     {
 
@@ -22,6 +24,7 @@ namespace tinder_clone.Views
 
         public MessagePage()
         {
+            //create databse connection trough combination of sqlite and LINQ
             InitializeComponent();
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
@@ -30,6 +33,7 @@ namespace tinder_clone.Views
             var names = myquery.MatchNames;
 
 
+            // autogenerate all matches trough users database
               for (int i = 0; i < names.Count; i++)
               {
                   Label namelabel = new Label();
@@ -77,7 +81,8 @@ namespace tinder_clone.Views
 
         }
 
-        private void SendSMSprocedural(object sender, EventArgs e, int phoneindex)
+        //sendsms trough auto generated list of users including data
+         void SendSMSprocedural(object sender, EventArgs e, int phoneindex)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
@@ -93,7 +98,8 @@ namespace tinder_clone.Views
 
         }
 
-        private void SendCallprocedural(object sender, EventArgs e, int phoneindex)
+        //send telephone call trough auto generated list of users including data
+        void SendCallprocedural(object sender, EventArgs e, int phoneindex)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
@@ -108,7 +114,8 @@ namespace tinder_clone.Views
 
         }
 
-        private void SendSMS_OnClicked (object sender, EventArgs e)
+        //mockdata sms call
+         void SendSMS_OnClicked (object sender, EventArgs e)
         {
             var smsMessanger = CrossMessaging.Current.SmsMessenger;
 
@@ -118,13 +125,21 @@ namespace tinder_clone.Views
             }
         }
 
-        private void PhoneCall_OnClicked(object sender, EventArgs e)
+        //mockdata phone call
+         void PhoneCall_OnClicked(object sender, EventArgs e)
         {
             var phoneCallTask = CrossMessaging.Current.PhoneDialer;
             if (phoneCallTask.CanMakePhoneCall)
             {
                 phoneCallTask.MakePhoneCall("+91 7200606860","my name");
             }
+        }
+
+        //back buttno
+        void Go_Back(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new HomePage();
+
         }
     }
 }

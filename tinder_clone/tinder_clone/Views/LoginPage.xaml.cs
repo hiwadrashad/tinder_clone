@@ -27,12 +27,14 @@ namespace tinder_clone.Views
             InitializeComponent();
         }
 
+        // registration button
         void Handle_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new RegistrationPage();
             //await Navigation.PushAsync(new RegistrationPage());
         }
 
+        // login mechanism
         void Handle_Clicked1(object sender, EventArgs e)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");

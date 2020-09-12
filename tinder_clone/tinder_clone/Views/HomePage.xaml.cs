@@ -12,6 +12,7 @@ namespace tinder_clone.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        //homepage with click function to navigate to other pages
         public HomePage()
         {
             InitializeComponent();
@@ -33,6 +34,12 @@ namespace tinder_clone.Views
         void LogOutClicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new LoginPage();
+
+        }
+
+        void SuperLikePageTapped(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new SuperLikePage();
 
         }
     }

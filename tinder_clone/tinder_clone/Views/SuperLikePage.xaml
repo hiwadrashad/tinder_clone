@@ -4,12 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="tinder_clone.Views.MessagePage"
-             BackgroundImageSource="vectorbackground2">
+             x:Class="tinder_clone.Views.SuperLikePage">
     <ContentPage.Content>
-
-       <!-- <Grid x:Name="MainGrid"> -->
-
 
         <StackLayout>
             <ScrollView VerticalScrollBarVisibility="Default">
@@ -17,17 +13,15 @@
                 <Grid x:Name="MainGrid">
                     <Label Text="michael Johnson " TextColor="Black" Grid.Column="0" Grid.Row="0"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
                     <Label Text="+91 7200606860 " TextColor="Black" Grid.Column="0" Grid.Row="1"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
-                    <Button Text="Send SMS" VerticalOptions="End" Grid.Column="1"  Grid.Row="0" FontAttributes="Bold, Italic" BackgroundColor="LightPink" Clicked="SendSMS_OnClicked"></Button>
-                    <Button  Text="Phone Call" VerticalOptions="Start" Grid.Column="1" Grid.Row="1" FontAttributes="Bold, Italic" BackgroundColor="LightPink"  Clicked="PhoneCall_OnClicked"></Button>
+                    <Button Text="Like" VerticalOptions="End" Grid.Column="1"  Grid.Row="0" FontAttributes="Bold, Italic" BackgroundColor="LightPink" Clicked="SuperLiked"></Button>
+                    <Button  Text="Dislike" VerticalOptions="Start" Grid.Column="1" Grid.Row="1" FontAttributes="Bold, Italic" BackgroundColor="LightPink"  Clicked="SuperDisliked"></Button>
                 </Grid>
-               
+
             </ScrollView>
             <StackLayout TranslationY="400">
                 <Button Text="Go back" BackgroundColor="LightPink" TextColor="Black" Clicked="Go_Back"></Button>
             </StackLayout>
-            </StackLayout>
-
-        <!-- </Grid> -->
+        </StackLayout>
 
     </ContentPage.Content>
 </ContentPage>

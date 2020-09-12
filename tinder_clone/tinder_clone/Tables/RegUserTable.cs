@@ -7,6 +7,7 @@ namespace tinder_clone.Tables
 {
     class RegUserTable
     {
+        //model to create data frame
         public Guid MyProperty { get; set; }
         public int UserId { get; set; }
         public string Username { get; set; }
@@ -24,6 +25,8 @@ namespace tinder_clone.Tables
         public List<string> telephonenumbers { get; set; }
 
         public List<string> MatchNames { get; set; }
+
+        public List<int> SuperLikes { get; set; }
 
 
     }

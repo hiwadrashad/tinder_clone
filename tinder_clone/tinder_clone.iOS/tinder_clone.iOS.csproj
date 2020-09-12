@@ -158,40 +158,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\superlike2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\cross2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\heart2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pic1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pic2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pic3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pic4.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pic5.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pic6.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\pic7.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\login_page.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\swipe.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\swipe2.png" />
@@ -206,24 +176,21 @@
     <BundleResource Include="Resources\backgroundpage.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\vectorbackground.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\vectorbackground2.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\tinder.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\cross3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\heart3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\superlike3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\superlike2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cross2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\heart2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\superlikemenu.gif" />
   </ItemGroup>
 </Project>

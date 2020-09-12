@@ -27,7 +27,7 @@ namespace tinder_clone.Views
             //   LoginPage login = new LoginPage();
             createnextmatch();
     
-
+            //mockdata
             // var listofallavailable = db.Table<RegUserTable>().Where(u => u.UserId)
             //  testmodel testitem = new testmodel();
             //  testitem.Images = "test1.png";
@@ -36,6 +36,7 @@ namespace tinder_clone.Views
 
         }
 
+        // generate next potential match to show on the swipepage
         public void createnextmatch()
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
@@ -63,7 +64,7 @@ namespace tinder_clone.Views
         }
 
    
-
+        //action after no tapped
         void NoTapped(object sender, EventArgs args)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
@@ -74,11 +75,14 @@ namespace tinder_clone.Views
             myquery.Matches = dictionaryofmatches;
             db.Update(myquery);
             createnextmatch();
+            //mockdata
             // testmodel testitem = new testmodel();
             // testitem.Images = "test2.jpg";
             // BindingContext = testitem;
 
         }
+
+        //action after yes tapped
 
         void YesTapped(object sender, EventArgs args)
         {
@@ -96,16 +100,18 @@ namespace tinder_clone.Views
                 secondpersonquery.MatchNames.Add(myquery.Username);
                 db.Update(secondpersonquery);
                 myquery.telephonenumbers.Add(secondpersonquery.PhoneNumber);
-                secondpersonquery.MatchNames.Add(secondpersonquery.Username);
+                myquery.MatchNames.Add(secondpersonquery.Username);
                 db.Update(myquery);
             }
             createnextmatch();
+            //mockdata
             // testmodel testitem = new testmodel();
             // testitem.Images = "test2.jpg";
             // BindingContext = testitem;
 
         }
 
+        //action after super like tapped
         void SuperLikeTapped(object sender, EventArgs args)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
@@ -122,14 +128,28 @@ namespace tinder_clone.Views
                 secondpersonquery.MatchNames.Add(myquery.Username);
                 db.Update(secondpersonquery);
                 myquery.telephonenumbers.Add(secondpersonquery.PhoneNumber);
-                secondpersonquery.MatchNames.Add(secondpersonquery.Username);
+                myquery.MatchNames.Add(secondpersonquery.Username);
                 db.Update(myquery);
             }
+            else
+            {
+                var superlikelistsecondperson = secondpersonquery.SuperLikes;
+                superlikelistsecondperson.Add(myquery.UserId);
+                secondpersonquery.SuperLikes = superlikelistsecondperson;
+                db.Update(secondpersonquery);
+            }
             createnextmatch();
+            //mockdata
             // testmodel testitem = new testmodel();
             // testitem.Images = "test2.jpg";
             // BindingContext = testitem;
 
+        }
+
+        //back menu tapped
+        void Go_Back(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
         }
 
 
