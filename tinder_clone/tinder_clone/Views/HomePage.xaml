@@ -7,8 +7,18 @@
              x:Class="tinder_clone.Views.HomePage"
              BackgroundImageSource="login_page.png">
     <ContentPage.Content>
-        <StackLayout>
+      
+            <StackLayout>
             <Grid VerticalOptions="CenterAndExpand" Margin="28" RowSpacing="20">
+                <StackLayout VerticalOptions="Start">
+                    <Image Source="settings" Scale=".15" TranslationY="-160" TranslationX="-150">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                     Tapped="SettingsTapped"
+                     NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
 
                 <Image Source="swipe2.png" MinimumWidthRequest="50" Grid.Row="1">
                     <Image.GestureRecognizers>

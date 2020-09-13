@@ -13,8 +13,8 @@
                 <Grid x:Name="MainGrid">
                     <Label Text="michael Johnson " TextColor="Black" Grid.Column="0" Grid.Row="0"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
                     <Label Text="+91 7200606860 " TextColor="Black" Grid.Column="0" Grid.Row="1"  FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
-                    <Button Text="Like" VerticalOptions="End" Grid.Column="1"  Grid.Row="0" FontAttributes="Bold, Italic" BackgroundColor="LightPink" Clicked="SuperLiked"></Button>
-                    <Button  Text="Dislike" VerticalOptions="Start" Grid.Column="1" Grid.Row="1" FontAttributes="Bold, Italic" BackgroundColor="LightPink"  Clicked="SuperDisliked"></Button>
+                    <Button Text="Super Like" VerticalOptions="End" Grid.Column="1"  Grid.Row="0" FontAttributes="Bold, Italic" BackgroundColor="LightPink" Clicked="SuperLiked"></Button>
+                    <Button  Text="Super Dislike" VerticalOptions="Start" Grid.Column="1" Grid.Row="1" FontAttributes="Bold, Italic" BackgroundColor="LightPink"  Clicked="SuperDisliked"></Button>
                 </Grid>
 
             </ScrollView>

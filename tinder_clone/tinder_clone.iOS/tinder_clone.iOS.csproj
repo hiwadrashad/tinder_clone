@@ -193,4 +193,7 @@
   <ItemGroup>
     <None Include="Resources\superlikemenu.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings.gif" />
+  </ItemGroup>
 </Project>

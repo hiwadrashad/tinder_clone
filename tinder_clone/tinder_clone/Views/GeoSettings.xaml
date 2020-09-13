@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="tinder_clone.Views.GeoSettings"
+             BackgroundImageSource="vectorbackground2">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="Center">
+
+            <Label Text="Choose your allowed distance" FontAttributes="Bold" FontSize="25" HorizontalOptions="Center"></Label>
+                <Slider ValueChanged="ValueChanged" x:Name="Mainslider" Minimum="0" Maximum="100" HeightRequest="30" WidthRequest="200" BackgroundColor="LightPink" ThumbColor="LightBlue"></Slider>
+            <Label x:Name="MainLabel"  FontSize="60" HorizontalTextAlignment="Center"></Label> 
+            <StackLayout VerticalOptions="End">
+                <Button Text="Set Distance" BackgroundColor="LightPink" Clicked="SetDistance_Clicked"></Button>
+                <Button Text="Go back" BackgroundColor="LightPink" Clicked="BackButton_Clicked"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

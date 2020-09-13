@@ -11,20 +11,22 @@ using SQLite;
 using tinder_clone.Tables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace tinder_clone.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrationPage : ContentPage
     {
-    
 
+        Xamarin.Essentials.Location myLocation;
         public RegistrationPage()
         {
 
             InitializeComponent();
             this.btnfoto.Clicked += Btnfoto_Clicked;
         }
+
 
         //pick picture from gallery
         private async void Btnfoto_Clicked(object sender, EventArgs e)
@@ -80,19 +82,29 @@ namespace tinder_clone.Views
         }
 
         //register person
-        void Handle_Clicked(object sender, EventArgs e)
+        async void Handle_Clicked(object sender, EventArgs e)
         {
             var binFormatter = new BinaryFormatter();
             var mstream = new MemoryStream();
             Random rnd = new Random();
             binFormatter.Serialize(mstream, this.imgcamara);
-           
+      
            
 
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
             db.CreateTable<RegUserTable>();
 
+      
+                var request = new GeolocationRequest(GeolocationAccuracy.High);
+                var location = await Geolocation.GetLocationAsync(request);
+
+                if (location != null)
+                {
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    myLocation = location;
+                }
+  
 
             var item = new RegUserTable()
             {
@@ -101,8 +113,12 @@ namespace tinder_clone.Views
                 Password = EntryUserPassword.Text,
                 Email = EntryUserEmail.Text,
                 PhoneNumber = EntryUserPhoneNumber.Text,
-                UploadedImage = mstream.ToArray()
+                UploadedImage = mstream.ToArray(),
+                Latitude = myLocation.Latitude,
+                Longitude = myLocation.Longitude,
+                Distance = 50
                 
+
 
             };
           //  var ms = new MemoryStream(item.UploadedImage);

@@ -82,12 +82,21 @@ namespace tinder_clone.Views
             var matcheslist = myquery.Matches;
             var secondpersonid = superlikedlist[i];
             var secondpersonquery = db.Table<RegUserTable>().Where(u => u.UserId.Equals(secondpersonid)).FirstOrDefault();
+            
             matcheslist.Add(secondpersonid, true);
+            secondpersonquery.Matches.Add(myquery.UserId, true);
             superlikedlist.RemoveAt(i);
             myquery.SuperLikes = superlikedlist;
             myquery.Matches = matcheslist;
             db.Update(myquery);
-            //* save point
+            db.Update(secondpersonquery);
+
+            myquery.telephonenumbers.Add(secondpersonquery.PhoneNumber);
+            myquery.MatchNames.Add(secondpersonquery.Username);
+            db.Update(myquery);
+            secondpersonquery.telephonenumbers.Add(myquery.PhoneNumber);
+            secondpersonquery.MatchNames.Add(myquery.Username);
+            db.Update(secondpersonquery);
 
         }
 
