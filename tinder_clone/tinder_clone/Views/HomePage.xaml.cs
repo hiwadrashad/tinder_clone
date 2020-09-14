@@ -42,5 +42,10 @@ namespace tinder_clone.Views
             App.Current.MainPage = new SuperLikePage();
 
         }
+
+        void SettingsTapped(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new SuperLikePage();
+        }
     }
 }

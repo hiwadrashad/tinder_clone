@@ -33,6 +33,12 @@ namespace tinder_clone.Views
 
         }
 
+        // set label value
+        void ValueChanged(object sender, EventArgs e)
+        {
+            MainLabel.Text = Mainslider.Value.ToString();
+        }
+
         //back button
         void BackButton_Clicked(object sender, EventArgs e)
         {

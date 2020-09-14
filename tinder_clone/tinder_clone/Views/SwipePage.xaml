@@ -16,7 +16,7 @@
 
 
 
-            <Image Grid.Row="1" Grid.Column="0"  WidthRequest="100" HorizontalOptions="CenterAndExpand" Source="C:\Users\itv-admin\source\repos\tinder_clone\tinder_clone\tinder_clone\Resources\cross2.gif">
+            <Image Grid.Row="1" Grid.Column="0"  WidthRequest="100" HorizontalOptions="CenterAndExpand" Source="cross2.gif">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
                      Tapped="NoTapped"

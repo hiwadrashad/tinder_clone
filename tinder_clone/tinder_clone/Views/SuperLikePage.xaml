@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="tinder_clone.Views.SuperLikePage">
+             x:Class="tinder_clone.Views.SuperLikePage"
+             BackgroundImageSource="vectorbackground2">
     <ContentPage.Content>
 
         <StackLayout>

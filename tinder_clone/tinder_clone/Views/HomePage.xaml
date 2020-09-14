@@ -36,7 +36,7 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Text="Contact Page" FontSize="40" TextColor="White" FontAttributes="Bold, Italic" HorizontalTextAlignment="Center" Grid.Row="4"></Label>
-                <Image Scale=".8" Grid.Row="5" Source="C:\Users\itv-admin\source\repos\tinder_clone\tinder_clone\tinder_clone\Resources\superlikemenu.gif">
+                <Image Scale=".8" Grid.Row="5" Source="superlikemenu.gif">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer
                      Tapped="SuperLikePageTapped"
