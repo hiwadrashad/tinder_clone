@@ -22,6 +22,7 @@ namespace tinder_clone.Views
             InitializeComponent();
         }
 
+        //set maximum distance allowed
         void SetDistance_Clicked(object sender, EventArgs e)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
@@ -31,6 +32,8 @@ namespace tinder_clone.Views
             db.Update(myquery);
 
         }
+
+        //back button
         void BackButton_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new LoginPage();

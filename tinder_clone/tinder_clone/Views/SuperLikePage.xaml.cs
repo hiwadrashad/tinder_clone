@@ -128,6 +128,7 @@ namespace tinder_clone.Views
 
         }
 
+        //back button
         void Go_Back(object sender, EventArgs e)
         {
             App.Current.MainPage = new HomePage();

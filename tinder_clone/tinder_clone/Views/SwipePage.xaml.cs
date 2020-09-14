@@ -11,6 +11,7 @@ using tinder_clone.Tables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using tinder_clone.Views;
+using Xamarin.Essentials;
 
 namespace tinder_clone.Views
 {
@@ -36,7 +37,7 @@ namespace tinder_clone.Views
 
         }
 
-        // generate next potential match to show on the swipepage
+        // generate next potential match to show on the swipepage including geolocation calculator
         public void createnextmatch()
         {
 
@@ -48,13 +49,25 @@ namespace tinder_clone.Views
             for (int i = 0; i < previousmatcheslist.Count; i++)
             {
                 if (db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])) != null)
-
                 {
+                    var testeligableuser = db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])).FirstOrDefault();
 
-                    eligableuser = db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])).FirstOrDefault();
-                    var ms = new MemoryStream(eligableuser.UploadedImage);
-                    this.SwipeImage.Source = ImageSource.FromStream(() => ms);
-                    break;
+                    Location firstpersonlocation = new Location(myquery.Latitude, myquery.Longitude);
+                    Location secondpersonlocation = new Location(testeligableuser.Latitude, testeligableuser.Longitude);
+                    double distance = Location.CalculateDistance(firstpersonlocation, secondpersonlocation, DistanceUnits.Kilometers);
+
+                    if (myquery.Distance < distance && testeligableuser.Distance < distance)
+                    {
+
+                        eligableuser = db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])).FirstOrDefault();
+                        var ms = new MemoryStream(eligableuser.UploadedImage);
+                        this.SwipeImage.Source = ImageSource.FromStream(() => ms);
+                        break;
+                    }
+                    else
+                    {
+                        this.SwipeImage.Source = "test2.jpg";
+                    }
                 }
                 else
                 {
