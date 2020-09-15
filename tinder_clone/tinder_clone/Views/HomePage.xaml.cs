@@ -18,6 +18,8 @@ namespace tinder_clone.Views
             InitializeComponent();
         }
 
+       
+
 
         void SwipePageTapped(object sender, EventArgs e)
         {

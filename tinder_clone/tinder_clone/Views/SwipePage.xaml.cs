@@ -7,20 +7,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using tinder_clone.Tables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using tinder_clone.Views;
 using Xamarin.Essentials;
+using tinder_clone.Models;
+using tinder_clone.Assistant;
+using tinder_clone.Services;
 
 namespace tinder_clone.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SwipePage : ContentPage
     {
-        string fileNameu = @"C:\Temp.txt";
-        string filenamew = @"C:\Tempw.txt";
-        tinder_clone.Tables.RegUserTable eligableuser;
+        Item eligableuser;
+        MockDataStore dataStore = new MockDataStore();
 
         //        LoginPage page = new LoginPage();
         public SwipePage()
@@ -40,12 +41,7 @@ namespace tinder_clone.Views
         // generate next potential match to show on the swipepage including geolocation calculator
         public void createnextmatch()
         {
-
-
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var previousmatcheslist = myquery.Matches;
+            var previousmatcheslist = Users.MainUser.Matches;
             for (int i = 0; i < previousmatcheslist.Count; i++)
             {
                 if (db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])) != null)
@@ -81,12 +77,9 @@ namespace tinder_clone.Views
    
         //action after no tapped
         void NoTapped(object sender, EventArgs args)
-        {
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var dictionaryofmatches = myquery.Matches;
-            dictionaryofmatches.Add(eligableuser.UserId, false);
+        { 
+            var dictionaryofmatches = Users.MainUser.Matches;
+            dictionaryofmatches.Add(eligableuser.Id, false);
             myquery.Matches = dictionaryofmatches;
             db.Update(myquery);
             createnextmatch();
@@ -99,24 +92,24 @@ namespace tinder_clone.Views
 
         //action after yes tapped
 
-        void YesTapped(object sender, EventArgs args)
+        async void YesTapped(object sender, EventArgs args)
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var secondpersonquery = db.Table<RegUserTable>().Where(u => u.UserId.Equals(eligableuser.UserId)).FirstOrDefault();
-            var dictionaryofmatches = myquery.Matches;
-            dictionaryofmatches.Add(eligableuser.UserId, true);
-            myquery.Matches = dictionaryofmatches;
-            db.Update(myquery);
-            if (eligableuser.Matches[myquery.UserId])
+            Users.SwipeUser = dataStore.GetItemAsync(eligableuser.Id).Result;
+            var dictionaryofmatches = Users.MainUser.Matches;
+            dictionaryofmatches.Add(eligableuser.Id, true);
+            Users.MainUser.Matches = dictionaryofmatches;
+            await dataStore.UpdateItemAsync(Users.MainUser);
+            if (eligableuser.Matches[Users.MainUser.Id])
             {
-                secondpersonquery.telephonenumbers.Add(myquery.PhoneNumber);
-                secondpersonquery.MatchNames.Add(myquery.Username);
-                db.Update(secondpersonquery);
-                myquery.telephonenumbers.Add(secondpersonquery.PhoneNumber);
-                myquery.MatchNames.Add(secondpersonquery.Username);
-                db.Update(myquery);
+                Users.SwipeUser.telephonenumbers.Add(Users.MainUser.PhoneNumber);
+                Users.SwipeUser.MatchNames.Add(Users.MainUser.Username);
+                await dataStore.UpdateItemAsync(Users.SwipeUser);
+
+                Users.MainUser.telephonenumbers.Add(Users.SwipeUser.PhoneNumber);
+                Users.MainUser.MatchNames.Add(Users.SwipeUser.Username);
+                await dataStore.UpdateItemAsync(Users.MainUser);
             }
             createnextmatch();
             //mockdata

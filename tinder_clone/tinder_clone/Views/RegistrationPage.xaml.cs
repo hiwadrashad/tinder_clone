@@ -12,6 +12,8 @@ using tinder_clone.Tables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using tinder_clone.Services;
+using tinder_clone.Models;
 
 namespace tinder_clone.Views
 {
@@ -52,33 +54,6 @@ namespace tinder_clone.Views
                 file.Dispose();
                 return stream;
             });
-
-            // take picture method
-            /* try
-             {
-                 await CrossMedia.Current.Initialize();
-
-                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
-                 {
-                     await DisplayAlert("no camera available", "use another mobile", "OK");
-                     return;
-                 }
-                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions { SaveToAlbum = true });
-                 if (file == null)
-                     return;
-                 this.imgcamara.Source = ImageSource.FromStream(() =>
-                 {
-                     var stream = file.GetStream();
-                     return stream;
-                 });
-
-                 await DisplayAlert("foto ", "locatie" + file.AlbumPath, "ok");
-             }
-             catch (Exception ex)
-             {
-                 await DisplayAlert("permission denied", "permissions is denied \nError: " + ex.Message, "Ok");
-             } */
-
         }
 
         //register person
@@ -88,50 +63,44 @@ namespace tinder_clone.Views
             var mstream = new MemoryStream();
             Random rnd = new Random();
             binFormatter.Serialize(mstream, this.imgcamara);
-      
-           
 
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            db.CreateTable<RegUserTable>();
 
-      
-                var request = new GeolocationRequest(GeolocationAccuracy.High);
-                var location = await Geolocation.GetLocationAsync(request);
 
-                if (location != null)
-                {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                    myLocation = location;
-                }
-  
+            MockDataStore dataStore = new MockDataStore();          
+            var request = new GeolocationRequest(GeolocationAccuracy.High);
+            var location = await Geolocation.GetLocationAsync(request);
 
-            var item = new RegUserTable()
+
+
+
+            var item = new Item()
             {
-                UserId = rnd.Next(10000000),
+                Id = Guid.NewGuid().ToString(),
                 Username = EntryUserName.Text,
                 Password = EntryUserPassword.Text,
                 Email = EntryUserEmail.Text,
                 PhoneNumber = EntryUserPhoneNumber.Text,
                 UploadedImage = mstream.ToArray(),
+                Matches = new Dictionary<int, bool>(),
+                telephonenumbers = new List<string>(),
+                MatchNames = new List<string>(),
+                SuperLikes = new List<string>(),
                 Latitude = myLocation.Latitude,
                 Longitude = myLocation.Longitude,
                 Distance = 50
-                
-
-
             };
-          //  var ms = new MemoryStream(item.UploadedImage);
-         //   this.imgcamara.Source = ImageSource.FromStream(() => ms);
 
-            db.Insert(item);
+
+            await dataStore.AddItemAsync(item);
+            //  var ms = new MemoryStream(item.UploadedImage);
+            //   this.imgcamara.Source = ImageSource.FromStream(() => ms);
             Device.BeginInvokeOnMainThread(async () =>
             {
 
                 var result = await this.DisplayAlert("Congratulations", "User Registration Succesfull", "Yes", "Cancel");
 
                 if (result)
-                    App.Current.MainPage = new LoginPage();
+                    App.Current.MainPage = new HomePage();
 
             }
             );

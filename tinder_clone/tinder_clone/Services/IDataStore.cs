@@ -10,6 +10,7 @@ namespace tinder_clone.Services
         Task<bool> UpdateItemAsync(T item);
         Task<bool> DeleteItemAsync(string id);
         Task<T> GetItemAsync(string id);
+        Task<T> GetItemAsyncBynameAndPassword(string username);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
     }
 }

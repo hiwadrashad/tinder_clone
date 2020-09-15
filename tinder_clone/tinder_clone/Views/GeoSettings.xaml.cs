@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using tinder_clone.Assistant;
+using tinder_clone.Services;
 using tinder_clone.Tables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,8 +16,6 @@ namespace tinder_clone.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GeoSettings : ContentPage
     {
-        string fileNameu = @"C:\Temp.txt";
-        string filenamew = @"C:\Tempw.txt";
 
         public GeoSettings()
         {
@@ -23,13 +23,11 @@ namespace tinder_clone.Views
         }
 
         //set maximum distance allowed
-        void SetDistance_Clicked(object sender, EventArgs e)
+        async void SetDistance_Clicked(object sender, EventArgs e)
         {
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            myquery.Distance = Mainslider.Value;
-            db.Update(myquery);
+            MockDataStore dataStore = new MockDataStore();
+            Users.MainUser.Distance = Mainslider.Value;
+            await dataStore.UpdateItemAsync(Users.MainUser);
 
         }
 

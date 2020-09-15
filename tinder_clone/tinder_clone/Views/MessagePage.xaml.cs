@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using tinder_clone.Assistant;
+using tinder_clone.Services;
 using tinder_clone.Tables;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -14,23 +16,18 @@ using Xamarin.Forms.Xaml;
 namespace tinder_clone.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    
+
+  
     // message page to contact users
     public partial class MessagePage : ContentPage
     {
-
-       string fileNameu = @"C:\Temp.txt";
-       string filenamew = @"C:\Tempw.txt";
 
         public MessagePage()
         {
             //create databse connection trough combination of sqlite and LINQ
             InitializeComponent();
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var telephonenumbers = myquery.telephonenumbers;
-            var names = myquery.MatchNames;
+            var telephonenumbers = Users.MainUser.telephonenumbers;
+            var names = Users.MainUser.MatchNames;
 
 
             // autogenerate all matches trough users database
@@ -84,10 +81,8 @@ namespace tinder_clone.Views
         //sendsms trough auto generated list of users including data
          void SendSMSprocedural(object sender, EventArgs e, int phoneindex)
         {
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var telephonenumbers = myquery.telephonenumbers;
+           
+            var telephonenumbers = Users.MainUser.telephonenumbers;
 
             var smsMessanger = CrossMessaging.Current.SmsMessenger;
 
@@ -101,10 +96,7 @@ namespace tinder_clone.Views
         //send telephone call trough auto generated list of users including data
         void SendCallprocedural(object sender, EventArgs e, int phoneindex)
         {
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var telephonenumbers = myquery.telephonenumbers;
+            var telephonenumbers = Users.MainUser.telephonenumbers;
 
             var phoneCallTask = CrossMessaging.Current.PhoneDialer;
             if (phoneCallTask.CanMakePhoneCall)

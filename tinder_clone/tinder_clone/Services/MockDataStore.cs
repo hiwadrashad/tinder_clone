@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using tinder_clone.GPMethods;
 using tinder_clone.Models;
+using tinder_clone.GPMethods;
 
 namespace tinder_clone.Services
 {
     public class MockDataStore : IDataStore<Item>
     {
-        readonly List<Item> items;
+       static  readonly List<Item> items;
 
-        public MockDataStore()
+       static MockDataStore()
         {
+  
             items = new List<Item>()
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                new Item { Id = Guid.NewGuid().ToString(), Username = "Trieuvan", Password="JackFruit7", Email="trieuvan@outlook.com", PhoneNumber="0670696542", UploadedImage="", Matches=new Dictionary<int, bool>(), telephonenumbers=new List<string>(), MatchNames=new List<string>(), SuperLikes=new List<string>(), Latitude=52.370216, Longitude=4.895168, Distance=50  },
+                new Item { Id = Guid.NewGuid().ToString(), Username = "Amaranth", Password="Sophisticated10", Email="amaranth@yahoo.ca", PhoneNumber="0697973709", UploadedImage="", Matches=new Dictionary<int, bool>(), telephonenumbers=new List<string>(), MatchNames=new List<string>(), SuperLikes=new List<string>(), Latitude=43.653225, Longitude=-79.383186, Distance=50  },
+                new Item { Id = Guid.NewGuid().ToString(), Username = "Chris", Password="UninterestedLook11", Email="chrisj@yahoo.com", PhoneNumber="0677030653", UploadedImage="", Matches=new Dictionary<int, bool>(), telephonenumbers=new List<string>(), MatchNames=new List<string>(), SuperLikes=new List<string>(), Latitude=52.370216, Longitude=4.895168, Distance=50  },
             };
         }
 
@@ -50,6 +50,11 @@ namespace tinder_clone.Services
         public async Task<Item> GetItemAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+        }
+
+        public async Task<Item> GetItemAsyncBynameAndPassword(string Username, string Password)
+        {
+            return await Task.FromResult(items.Where(s => s.Username == Username && s.Password == Password).FirstOrDefault());
         }
 
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
