@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using tinder_clone.Assistant;
 using tinder_clone.Services;
-using tinder_clone.Tables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

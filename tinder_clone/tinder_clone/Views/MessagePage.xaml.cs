@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using tinder_clone.Assistant;
 using tinder_clone.Services;
-using tinder_clone.Tables;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using tinder_clone.ViewModels;
 
 namespace tinder_clone.Views
 {
@@ -22,16 +22,18 @@ namespace tinder_clone.Views
     public partial class MessagePage : ContentPage
     {
 
+        ViewModels.MessageViewModel messageViewModel = new MessageViewModel();
         public MessagePage()
         {
             //create databse connection trough combination of sqlite and LINQ
             InitializeComponent();
             var telephonenumbers = Users.MainUser.telephonenumbers;
             var names = Users.MainUser.MatchNames;
+           
 
 
             // autogenerate all matches trough users database
-              for (int i = 0; i < names.Count; i++)
+            for (int i = 0; i < names.Count; i++)
               {
                   Label namelabel = new Label();
                   Label numberlabel = new Label();
@@ -78,53 +80,32 @@ namespace tinder_clone.Views
 
         }
 
+        
+        
         //sendsms trough auto generated list of users including data
          void SendSMSprocedural(object sender, EventArgs e, int phoneindex)
         {
-           
-            var telephonenumbers = Users.MainUser.telephonenumbers;
-
-            var smsMessanger = CrossMessaging.Current.SmsMessenger;
-
-            if (smsMessanger.CanSendSms)
-            {
-                smsMessanger.SendSms(telephonenumbers[phoneindex], "Welcome to Xamarin.Forms");
-            }
+            messageViewModel.SendSMSprocedural(phoneindex);
 
         }
 
         //send telephone call trough auto generated list of users including data
         void SendCallprocedural(object sender, EventArgs e, int phoneindex)
         {
-            var telephonenumbers = Users.MainUser.telephonenumbers;
-
-            var phoneCallTask = CrossMessaging.Current.PhoneDialer;
-            if (phoneCallTask.CanMakePhoneCall)
-            {
-                phoneCallTask.MakePhoneCall(telephonenumbers[phoneindex], "my name");
-            }
-
+            messageViewModel.SendCallprocedural(phoneindex);
+ 
         }
 
         //mockdata sms call
          void SendSMS_OnClicked (object sender, EventArgs e)
         {
-            var smsMessanger = CrossMessaging.Current.SmsMessenger;
-
-            if (smsMessanger.CanSendSms)
-            {
-                smsMessanger.SendSms("+91 7200606860", "Welcome to Xamarin.Forms");
-            }
+            messageViewModel.SendSMS_OnClicked();
         }
 
         //mockdata phone call
          void PhoneCall_OnClicked(object sender, EventArgs e)
         {
-            var phoneCallTask = CrossMessaging.Current.PhoneDialer;
-            if (phoneCallTask.CanMakePhoneCall)
-            {
-                phoneCallTask.MakePhoneCall("+91 7200606860","my name");
-            }
+            messageViewModel.PhoneCall_OnClicked();
         }
 
         //back buttno

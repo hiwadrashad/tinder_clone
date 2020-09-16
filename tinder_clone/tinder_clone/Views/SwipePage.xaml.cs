@@ -20,21 +20,13 @@ namespace tinder_clone.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SwipePage : ContentPage
     {
-        Item eligableuser;
         MockDataStore dataStore = new MockDataStore();
-
-        //        LoginPage page = new LoginPage();
         public SwipePage()
         {
-            //   LoginPage login = new LoginPage();
+          
             createnextmatch();
     
-            //mockdata
-            // var listofallavailable = db.Table<RegUserTable>().Where(u => u.UserId)
-            //  testmodel testitem = new testmodel();
-            //  testitem.Images = "test1.png";
-            //  BindingContext = testitem;
-            //  InitializeComponent();
+            
 
         }
 
@@ -42,21 +34,20 @@ namespace tinder_clone.Views
         public void createnextmatch()
         {
             var previousmatcheslist = Users.MainUser.Matches;
-            for (int i = 0; i < previousmatcheslist.Count; i++)
+            foreach (var item in dataStore.ReturnList())
             {
-                if (db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])) != null)
+                if (!Users.MainUser.Matches.ContainsKey(item.Id))
                 {
-                    var testeligableuser = db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])).FirstOrDefault();
 
-                    Location firstpersonlocation = new Location(myquery.Latitude, myquery.Longitude);
-                    Location secondpersonlocation = new Location(testeligableuser.Latitude, testeligableuser.Longitude);
+                    Location firstpersonlocation = new Location(Users.MainUser.Latitude, Users.MainUser.Longitude);
+                    Location secondpersonlocation = new Location(item.Latitude, item.Longitude);
                     double distance = Location.CalculateDistance(firstpersonlocation, secondpersonlocation, DistanceUnits.Kilometers);
 
-                    if (myquery.Distance < distance && testeligableuser.Distance < distance)
+                    if (Users.MainUser.Distance < distance && item.Distance < distance)
                     {
 
-                        eligableuser = db.Table<RegUserTable>().Where(u => !u.UserId.Equals(previousmatcheslist[i])).FirstOrDefault();
-                        var ms = new MemoryStream(eligableuser.UploadedImage);
+                        Users.SwipeUser = item;
+                        var ms = new MemoryStream(item.UploadedImage);
                         this.SwipeImage.Source = ImageSource.FromStream(() => ms);
                         break;
                     }
@@ -76,17 +67,13 @@ namespace tinder_clone.Views
 
    
         //action after no tapped
-        void NoTapped(object sender, EventArgs args)
+        async void NoTapped(object sender, EventArgs args)
         { 
             var dictionaryofmatches = Users.MainUser.Matches;
-            dictionaryofmatches.Add(eligableuser.Id, false);
-            myquery.Matches = dictionaryofmatches;
-            db.Update(myquery);
+            dictionaryofmatches.Add(Users.SwipeUser.Id, false);
+            Users.MainUser.Matches = dictionaryofmatches;
+            await dataStore.UpdateItemAsync(Users.MainUser);
             createnextmatch();
-            //mockdata
-            // testmodel testitem = new testmodel();
-            // testitem.Images = "test2.jpg";
-            // BindingContext = testitem;
 
         }
 
@@ -96,12 +83,11 @@ namespace tinder_clone.Views
         {
             var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
             var db = new SQLiteConnection(dbpath);
-            Users.SwipeUser = dataStore.GetItemAsync(eligableuser.Id).Result;
             var dictionaryofmatches = Users.MainUser.Matches;
-            dictionaryofmatches.Add(eligableuser.Id, true);
+            dictionaryofmatches.Add(Users.SwipeUser.Id, true);
             Users.MainUser.Matches = dictionaryofmatches;
             await dataStore.UpdateItemAsync(Users.MainUser);
-            if (eligableuser.Matches[Users.MainUser.Id])
+            if (Users.SwipeUser.Matches[Users.MainUser.Id])
             {
                 Users.SwipeUser.telephonenumbers.Add(Users.MainUser.PhoneNumber);
                 Users.SwipeUser.MatchNames.Add(Users.MainUser.Username);
@@ -120,37 +106,34 @@ namespace tinder_clone.Views
         }
 
         //action after super like tapped
-        void SuperLikeTapped(object sender, EventArgs args)
+        async void SuperLikeTapped(object sender, EventArgs args)
         {
-            var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            var db = new SQLiteConnection(dbpath);
-            var myquery = db.Table<RegUserTable>().Where(u => u.Username.Equals(File.ReadAllText(fileNameu)) && u.Password.Equals(File.ReadAllText(filenamew))).FirstOrDefault();
-            var secondpersonquery = db.Table<RegUserTable>().Where(u => u.UserId.Equals(eligableuser.UserId)).FirstOrDefault();
-            var dictionaryofmatches = myquery.Matches;
-            dictionaryofmatches.Add(eligableuser.UserId, true);
-            myquery.Matches = dictionaryofmatches;
-            db.Update(myquery);
-            if (eligableuser.Matches[myquery.UserId])
+            var dictionaryofmatches = Users.MainUser.Matches;
+            dictionaryofmatches.Add(Users.SwipeUser.Id, true);
+            Users.MainUser.Matches = dictionaryofmatches;
+
+            await dataStore.UpdateItemAsync(Users.MainUser);
+
+            if (Users.SwipeUser.Matches[Users.MainUser.Id])
             {
-                secondpersonquery.telephonenumbers.Add(myquery.PhoneNumber);
-                secondpersonquery.MatchNames.Add(myquery.Username);
-                db.Update(secondpersonquery);
-                myquery.telephonenumbers.Add(secondpersonquery.PhoneNumber);
-                myquery.MatchNames.Add(secondpersonquery.Username);
-                db.Update(myquery);
+                Users.SwipeUser.telephonenumbers.Add(Users.MainUser.PhoneNumber);
+                Users.SwipeUser.MatchNames.Add(Users.MainUser.Username);
+
+                await dataStore.UpdateItemAsync(Users.SwipeUser);
+
+                Users.MainUser.telephonenumbers.Add(Users.SwipeUser.PhoneNumber);
+                Users.MainUser.MatchNames.Add(Users.SwipeUser.Username);
+
+                await dataStore.UpdateItemAsync(Users.MainUser);
             }
             else
             {
-                var superlikelistsecondperson = secondpersonquery.SuperLikes;
-                superlikelistsecondperson.Add(myquery.UserId);
-                secondpersonquery.SuperLikes = superlikelistsecondperson;
-                db.Update(secondpersonquery);
+                var superlikelistsecondperson = Users.SwipeUser.SuperLikes;
+                superlikelistsecondperson.Add(Users.MainUser.Id);
+                Users.SwipeUser.SuperLikes = superlikelistsecondperson;
+                await dataStore.UpdateItemAsync(Users.SwipeUser);
             }
             createnextmatch();
-            //mockdata
-            // testmodel testitem = new testmodel();
-            // testitem.Images = "test2.jpg";
-            // BindingContext = testitem;
 
         }
 

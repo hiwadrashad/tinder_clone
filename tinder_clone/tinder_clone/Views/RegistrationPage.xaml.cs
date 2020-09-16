@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using SQLite;
-using tinder_clone.Tables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
@@ -81,7 +80,7 @@ namespace tinder_clone.Views
                 Email = EntryUserEmail.Text,
                 PhoneNumber = EntryUserPhoneNumber.Text,
                 UploadedImage = mstream.ToArray(),
-                Matches = new Dictionary<int, bool>(),
+                Matches = new Dictionary<string, bool>(),
                 telephonenumbers = new List<string>(),
                 MatchNames = new List<string>(),
                 SuperLikes = new List<string>(),

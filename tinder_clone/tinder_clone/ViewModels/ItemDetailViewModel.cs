@@ -9,7 +9,7 @@ namespace tinder_clone.ViewModels
         public Item Item { get; set; }
         public ItemDetailViewModel(Item item = null)
         {
-            Title = item?.Text;
+            Title = item.Username;
             Item = item;
         }
     }
