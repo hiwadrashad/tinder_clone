@@ -25,58 +25,9 @@ namespace tinder_clone.Views
         ViewModels.MessageViewModel messageViewModel = new MessageViewModel();
         public MessagePage()
         {
-            //create databse connection trough combination of sqlite and LINQ
             InitializeComponent();
-            var telephonenumbers = Users.MainUser.telephonenumbers;
-            var names = Users.MainUser.MatchNames;
-           
-
-
-            // autogenerate all matches trough users database
-            for (int i = 0; i < names.Count; i++)
-              {
-                  Label namelabel = new Label();
-                  Label numberlabel = new Label();
-                  namelabel.Text = names[i];
-                  numberlabel.Text = telephonenumbers[i];
-                  namelabel.TextColor = Xamarin.Forms.Color.Black;
-                  numberlabel.TextColor = Xamarin.Forms.Color.Black;
-                  Grid.SetRow(namelabel, 2 + (i * 2));
-                  Grid.SetColumn(namelabel, 0);
-                  Grid.SetRow(numberlabel, 3 + (i * 2));
-                  Grid.SetColumn(numberlabel, 0);
-                  namelabel.FontSize = 25;
-                  numberlabel.FontSize = 25;
-                  namelabel.FontAttributes = Xamarin.Forms.FontAttributes.Bold;
-                  numberlabel.FontAttributes = Xamarin.Forms.FontAttributes.Bold;
-                  namelabel.HorizontalTextAlignment = TextAlignment.Center;
-                  numberlabel.HorizontalTextAlignment = TextAlignment.Center; 
-                  MainGrid.Children.Add(namelabel);
-                  MainGrid.Children.Add(numberlabel);
-
-                Button smsbutton = new Button();
-                Button callbutton = new Button();
-                smsbutton.Text = "Send Sms";
-                callbutton.Text = "Phone Call";
-                smsbutton.VerticalOptions = LayoutOptions.End;
-                callbutton.VerticalOptions = LayoutOptions.Start;
-                smsbutton.FontAttributes = FontAttributes.Bold | FontAttributes.Italic;
-                callbutton.FontAttributes = FontAttributes.Bold | FontAttributes.Italic;
-                smsbutton.BackgroundColor = Color.LightSalmon;
-                callbutton.BackgroundColor = Color.LightSalmon;
-                Grid.SetRow(smsbutton, 2 + (i * 2));
-                Grid.SetRow(callbutton, 3 + (i * 2));
-                Grid.SetColumn(smsbutton, 1);
-                Grid.SetColumn(callbutton, 1);
-                smsbutton.Clicked += ((s, e) => SendSMSprocedural(s, e, i));
-                callbutton.Clicked += ((s, e)=> SendCallprocedural(s,e,i));
-                MainGrid.Children.Add(smsbutton);
-                MainGrid.Children.Add(callbutton);
-
-
-              
-              }
-              
+            //auto generate list of all matches
+            messageViewModel.GenerateListFromDatabase(MainGrid,"Send SMS", "Phone Call", SendSMSprocedural, SendCallprocedural);              
 
         }
 

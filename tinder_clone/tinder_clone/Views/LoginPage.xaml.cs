@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using tinder_clone.Assistant;
 using tinder_clone.Models;
 using tinder_clone.Services;
+using tinder_clone.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,9 +18,11 @@ namespace tinder_clone.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        LoginViewModel loginvm = new LoginViewModel();
 
         public LoginPage()
         {
+            Users.dataStore = new MockDataStore();
             SetValue(NavigationPage.HasNavigationBarProperty, false);
             InitializeComponent();
         }
@@ -34,48 +37,7 @@ namespace tinder_clone.Views
         // login mechanism
         void Handle_Clicked1(object sender, EventArgs e)
         {
-            MockDataStore data = new MockDataStore();
-            try
-            {
-                Users.MainUser = data.GetItemAsyncBynameAndPassword(EntryUser.Text, EntryPassword.Text).Result;
-                if (Users.MainUser != null)
-                {
-                    App.Current.MainPage = new HomePage();
-                }
-                else
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-
-                        var result = await this.DisplayAlert("Congratulations", "failed user name and password", "Yes", "Cancel");
-
-                        if (result)
-                            App.Current.MainPage = new LoginPage();
-                        else
-                        {
-                            App.Current.MainPage = new LoginPage();
-                        }
-                    });
-                }
-
-
-
-            }
-            catch (Exception ex)
-            {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-
-                    var result = await this.DisplayAlert("Congratulations", "failed user name and password", "Yes", "Cancel");
-
-                    if (result)
-                        App.Current.MainPage = new LoginPage();
-                    else
-                    {
-                        App.Current.MainPage = new LoginPage();
-                    }
-                });
-            }
+            loginvm.LoginMethod(EntryUser, EntryPassword);
         }
     }
 }

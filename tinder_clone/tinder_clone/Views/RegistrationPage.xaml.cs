@@ -13,6 +13,7 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using tinder_clone.Services;
 using tinder_clone.Models;
+using tinder_clone.ViewModels;
 
 namespace tinder_clone.Views
 {
@@ -20,7 +21,7 @@ namespace tinder_clone.Views
     public partial class RegistrationPage : ContentPage
     {
 
-        Xamarin.Essentials.Location myLocation;
+        RegistrationViewModel registrationVM = new RegistrationViewModel();
         public RegistrationPage()
         {
 
@@ -30,79 +31,15 @@ namespace tinder_clone.Views
 
 
         //pick picture from gallery
-        private async void Btnfoto_Clicked(object sender, EventArgs e)
+        private void Btnfoto_Clicked(object sender, EventArgs e)
         {
-            if (!CrossMedia.Current.IsPickPhotoSupported)
-            {
-                await DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
-                return;
-            }
-            var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
-            {
-                PhotoSize = PhotoSize.MaxWidthHeight,
-                MaxWidthHeight = 500
-
-            }); ;
-
-            if (file == null)
-                return;
-
-            this.imgcamara.Source = ImageSource.FromStream(() =>
-            {
-                var stream = file.GetStream();
-                file.Dispose();
-                return stream;
-            });
+            registrationVM.PickPhoto(imgcamara);
         }
 
         //register person
-        async void Handle_Clicked(object sender, EventArgs e)
+        void Handle_Clicked(object sender, EventArgs e)
         {
-            var binFormatter = new BinaryFormatter();
-            var mstream = new MemoryStream();
-            Random rnd = new Random();
-            binFormatter.Serialize(mstream, this.imgcamara);
-
-
-
-            MockDataStore dataStore = new MockDataStore();          
-            var request = new GeolocationRequest(GeolocationAccuracy.High);
-            var location = await Geolocation.GetLocationAsync(request);
-
-
-
-
-            var item = new Item()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Username = EntryUserName.Text,
-                Password = EntryUserPassword.Text,
-                Email = EntryUserEmail.Text,
-                PhoneNumber = EntryUserPhoneNumber.Text,
-                UploadedImage = mstream.ToArray(),
-                Matches = new Dictionary<string, bool>(),
-                telephonenumbers = new List<string>(),
-                MatchNames = new List<string>(),
-                SuperLikes = new List<string>(),
-                Latitude = myLocation.Latitude,
-                Longitude = myLocation.Longitude,
-                Distance = 50
-            };
-
-
-            await dataStore.AddItemAsync(item);
-            //  var ms = new MemoryStream(item.UploadedImage);
-            //   this.imgcamara.Source = ImageSource.FromStream(() => ms);
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-
-                var result = await this.DisplayAlert("Congratulations", "User Registration Succesfull", "Yes", "Cancel");
-
-                if (result)
-                    App.Current.MainPage = new HomePage();
-
-            }
-            );
+            registrationVM.RegisterPerson(imgcamara, EntryUserName, EntryUserPassword, EntryUserEmail, EntryUserPhoneNumber);
         }
 
         //back button

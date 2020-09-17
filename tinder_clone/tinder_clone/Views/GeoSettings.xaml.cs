@@ -9,25 +9,23 @@ using tinder_clone.Assistant;
 using tinder_clone.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using tinder_clone.ViewModels;
 
 namespace tinder_clone.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GeoSettings : ContentPage
     {
-
+        GeoViewModel geomodel = new GeoViewModel();
         public GeoSettings()
         {
             InitializeComponent();
         }
 
         //set maximum distance allowed
-        async void SetDistance_Clicked(object sender, EventArgs e)
+        void SetDistance_Clicked(object sender, EventArgs e)
         {
-            MockDataStore dataStore = new MockDataStore();
-            Users.MainUser.Distance = Mainslider.Value;
-            await dataStore.UpdateItemAsync(Users.MainUser);
-
+           geomodel.SetDistanceMethod(Mainslider);
         }
 
         // set label value
